@@ -6,6 +6,12 @@ const NUMBER_OF_PAIRS = 8;
 // Array of symbols that are on one side of the cards - theme of the game
 const theme = ['🐶', '🐱', '🐭', '🐹', '🐻', '🐼', '🐵', '🐯'];
 
+// Returns random integer number from 0 to num - 1
+const randomInt = function (num) {
+  num = num || 0;
+  return Math.floor(Math.random() * num);
+}
+
 // Game Initialization
 const init = function () {
   // There are two cards with the same symbol on it.
