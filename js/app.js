@@ -16,8 +16,7 @@ const randomInt = function (num) {
 const init = function () {
   // There are two cards with the same symbol on it.
   // Use every symbol of the theme twice
-  const symbols = [];
-  symbols.push(...theme, ...theme);
+  const symbols = [...theme, ...theme];
 
   // Add cards to the game board: every card is an element of
   // the unordered list with id game-board
