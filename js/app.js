@@ -42,6 +42,11 @@ const init = function () {
   }
   // Add cards to the game board
   gameBoard.appendChild(fragment);
+
+  // Add Event Listener to the game board
+  gameBoard.addEventListener('click', function(event) {
+    event.target.classList.add('flipped');
+  });
 }
 
 init();

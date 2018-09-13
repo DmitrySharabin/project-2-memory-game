@@ -40,4 +40,9 @@ body {
   background-color: var(--themeColor);
   font-size: 3rem;
   text-align: center;
+  text-indent: -9999px;
+}
+
+.flipped {
+  text-indent: inherit;
 }
