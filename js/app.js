@@ -45,6 +45,15 @@ const init = function () {
 
   // Add Event Listener to the game board
   gameBoard.addEventListener('click', function(event) {
+    // Select flipped cards
+    const flippedCards = gameBoard.querySelectorAll('.flipped');
+
+    // Two cards maximum can be flipped (if they are not matched)
+    if (flippedCards.length > 1) {
+      for (const flippedCard of flippedCards) {
+        flippedCard.classList.remove('flipped');
+      }
+    } // End if (flippedCards.length > 1)
     event.target.classList.add('flipped');
   });
 }
