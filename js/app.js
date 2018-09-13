@@ -36,7 +36,7 @@ const init = function () {
     // To simulate shuffle of the cards pick one random element
     // of the array symbols and remove it from there.
     // Math.floor(Math.random() * symbols.length) is index of the element
-    card.textContent = symbols.splice(Math.floor(Math.random() * symbols.length), 1);
+    card.textContent = symbols.splice(randomInt(symbols.length), 1);
 
     fragment.appendChild(card);
   }
