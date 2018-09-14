@@ -45,11 +45,17 @@ const init = function () {
   // Shows if only one card (that is not matched) is flipped
   let isOnlyOneCardFlipped = false;
 
+  // Number of pairs of cards that are matched
+  let numOfMatchedPairs = 0;
+
+  // Shows if all cards are matched and the gave is over
+  let gameOver = false;
+
   // Add Event Listener to the game board
   gameBoard.addEventListener('click', function(event) {
     // Event fires only on cards that are not flipped or matched:
     //  only on cards that have only one class 'card'
-    if (event.target.classList.length === 1) {
+    if (!gameOver && event.target.classList.length === 1) {
       event.target.classList.add('flipped');
       if (isOnlyOneCardFlipped) {
         // Select flipped cards
@@ -57,19 +63,33 @@ const init = function () {
 
         // Check if the flipped cards match
         if (flippedCards[0].textContent === flippedCards[1].textContent) {
+          // Increase number of matched pairs
+          numOfMatchedPairs++;
+
+          // and mark the cards as matched
           for (const flippedCard of flippedCards) {
             flippedCard.classList.add('matched');
           }
         }
+
         // Flip back cards. If they matched they will stay 'flipped'
         for (const flippedCard of flippedCards) {
           flippedCard.classList.remove('flipped');
         }
+
         // There is no flipped cards that are not mached
         isOnlyOneCardFlipped = false;
       } else {
         // There is only one flipped card that is not matched
         isOnlyOneCardFlipped = true;
+      }
+
+      // Check if all cards are matched
+      if (numOfMatchedPairs === NUMBER_OF_PAIRS) {
+        // The game is over
+        gameOver = true;
+        // TODO: add modal to show user that the game is over
+        
       }
     }
   });
