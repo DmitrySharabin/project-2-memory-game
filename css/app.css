@@ -35,14 +35,6 @@ body {
 
 /* Styling card */
 .card {
-  list-style-type: none;
-  width: 100%;
-  height: 100%;
-  background-color: var(--themeColor);
-  font-size: 3rem;
-  text-align: center;
-  /* Hide symbol on the card by default */
-  text-indent: -9999px;
   /*
     Center symbol on the card vertically
     See https://css-tricks.com/centering-css-complete-guide/
@@ -50,16 +42,70 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+
+  /* Remove bullets */
+  list-style-type: none;
+
+  /* Card takes all available space of the grid-cell */
+  width: 100%;
+  height: 100%;
+
+  /* The back of a card */
+  background-color: var(--themeColor);
+  font-size: 3rem;
+  text-align: center;
+
+  /* Hide card's symbol by default */
+  color: transparent;
+
+  /* Visually show that cards are clickable */
   cursor: pointer;
+
 }
 
 /* Styling flipped card */
 .flipped {
-  text-indent: inherit;
+  /* Visually show that flipped cards are not clickable */
+  cursor: default;
+
+  background-color: var(--matchedCard);
+
+  /* Make the card's symbol visible */
+  color: inherit;
 }
 
 /* Styling matched card */
 .matched {
-  text-indent: inherit;
+  /* Visually show that matched cards are not clickable */
+  cursor: default;
+
   background-color: var(--matchedCard);
+
+  /* Make the card's symbol visible */
+  color: inherit;
+
+  /* Launch animation that shows that guess is correct */
+  animation: correct 1s;
+}
+
+/*
+  Animate correct guess
+  Source: http://www.theappguruz.com/tag-tools/web/CSSAnimations/
+*/
+@keyframes correct {
+  0% {
+    transform: scale3d(1, 1, 1);
+  }
+  10%, 20% {
+    transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg);
+  }
+  30%, 50%, 70%, 90% {
+    transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+  }
+  40%, 60%, 80% {
+    transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+  }
+  100% {
+    transform: scale3d(1, 1, 1);
+  }
 }
