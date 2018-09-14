@@ -3,14 +3,37 @@
 // Number of pairs of cards
 const NUMBER_OF_PAIRS = 8;
 
-// Array of symbols that are on one side of the cards - theme of the game
-const theme = ['🐶', '🐱', '🐭', '🐹', '🐻', '🐼', '🐵', '🐯'];
+// Themes of the game: symbols that are on one side of the cards and the color of the cards
+const themes = [
+  {
+    name: 'animals',
+    theme: '🐶🐱🐭🐹🐻🐼🐵🐯',
+    color: '#4dc774'
+  },
+  {
+    name: 'emoji',
+    theme: '😇😍😂😎😘😱😳😉',
+    color: '#ee7622'
+  },
+  {
+    name: 'flora',
+    theme: '🌵🌲🌴🌿🍁🌷🌺🌾',
+    color: '#60b3f1'
+  }
+];
 
 // Returns random integer number from 0 to num - 1
 const randomInt = function (num) {
   num = num || 0;
   return Math.floor(Math.random() * num);
 }
+
+// Pick random theme
+const themeNumber = randomInt(themes.length);
+// Set theme symbols
+const theme = themes[themeNumber].theme;
+// Set theme color
+document.querySelector(':root').style.setProperty('--themeColor', themes[themeNumber].color);
 
 // There are two cards with the same symbol on it.
 // Use every symbol of the theme twice
