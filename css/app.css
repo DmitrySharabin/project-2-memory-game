@@ -41,7 +41,16 @@ body {
   background-color: var(--themeColor);
   font-size: 3rem;
   text-align: center;
+  /* Hide symbol on the card by default */
   text-indent: -9999px;
+  /*
+    Center symbol on the card vertically
+    See https://css-tricks.com/centering-css-complete-guide/
+  */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  cursor: pointer;
 }
 
 /* Styling flipped card */
