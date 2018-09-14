@@ -74,6 +74,9 @@ let gameOver = false;
 
 // Add Event Listener to the game board
 gameBoard.addEventListener('click', function(event) {
+  // Game board shouldn't be flipped
+  if (event.target.nodeName === 'UL') { return; }
+
   // Event fires only on cards that are not flipped or matched
   if (!gameOver && !event.target.classList.contains('flipped') && !event.target.classList.contains('matched')) {
     event.target.classList.add('flipped');
