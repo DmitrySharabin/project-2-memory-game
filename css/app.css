@@ -20,6 +20,7 @@ body {
 /* Basic colors */
 :root {
   --themeColor: #ee7622;
+  --matchedCard: #eee;
 }
 
 /* Board grid */
@@ -43,6 +44,13 @@ body {
   text-indent: -9999px;
 }
 
+/* Styling flipped card */
 .flipped {
   text-indent: inherit;
+}
+
+/* Styling matched card */
+.matched {
+  text-indent: inherit;
+  background-color: var(--matchedCard);
 }

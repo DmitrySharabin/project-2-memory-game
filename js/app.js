@@ -34,7 +34,7 @@ const init = function () {
     // Symbol on a card is a random element of the array symbols.
     // To simulate shuffle of the cards pick one random element
     // of the array symbols and remove it from there.
-    // Math.floor(Math.random() * symbols.length) is index of the element
+    // randomInt(symbols.length) is index of the element
     card.textContent = symbols.splice(randomInt(symbols.length), 1);
 
     fragment.appendChild(card);
@@ -42,18 +42,36 @@ const init = function () {
   // Add cards to the game board
   gameBoard.appendChild(fragment);
 
+  // Shows if only one card (that is not matched) is flipped
+  let isOnlyOneCardFlipped = false;
+
   // Add Event Listener to the game board
   gameBoard.addEventListener('click', function(event) {
-    // Select flipped cards
-    const flippedCards = gameBoard.querySelectorAll('.flipped');
+    // Event fires only on cards that are not flipped or matched:
+    //  only on cards that have only one class 'card'
+    if (event.target.classList.length === 1) {
+      event.target.classList.add('flipped');
+      if (isOnlyOneCardFlipped) {
+        // Select flipped cards
+        const flippedCards = gameBoard.querySelectorAll('.flipped');
 
-    // Two cards maximum can be flipped (if they are not matched)
-    if (flippedCards.length > 1) {
-      for (const flippedCard of flippedCards) {
-        flippedCard.classList.remove('flipped');
+        // Check if the flipped cards match
+        if (flippedCards[0].textContent === flippedCards[1].textContent) {
+          for (const flippedCard of flippedCards) {
+            flippedCard.classList.add('matched');
+          }
+        }
+        // Flip back cards. If they matched they will stay 'flipped'
+        for (const flippedCard of flippedCards) {
+          flippedCard.classList.remove('flipped');
+        }
+        // There is no flipped cards that are not mached
+        isOnlyOneCardFlipped = false;
+      } else {
+        // There is only one flipped card that is not matched
+        isOnlyOneCardFlipped = true;
       }
-    } // End if (flippedCards.length > 1)
-    event.target.classList.add('flipped');
+    }
   });
 }
 
