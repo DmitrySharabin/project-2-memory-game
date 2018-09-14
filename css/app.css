@@ -91,6 +91,12 @@ body {
   animation: correct 1s;
 }
 
+/* Styling and animating cards that have been guessed incorrectly */
+.incorrect {
+  /* Launch animation that shows that guess is incorrect */
+  animation: changeCardColor 1s steps(1, end), shake 1s, flipOut 1s 1s;
+}
+
 /*
   Animate correct guess
   Source: http://www.theappguruz.com/tag-tools/web/CSSAnimations/
@@ -111,6 +117,29 @@ body {
   100% {
     transform: scale3d(1, 1, 1);
   }
+}
+
+/*
+  Animate incorrect guess
+  Inspired by: http://www.theappguruz.com/tag-tools/web/CSSAnimations/
+*/
+@keyframes shake {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translate3d(-10px, 0, 0);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translate3d(10px, 0, 0);
+  }
+}
+
+/* Make not matched cards red and show their symbols */
+@keyframes changeCardColor {
+  from { background: #f00; color: inherit; }
+  to { background: var(--themeColor); color: transparent; }
 }
 
 /*

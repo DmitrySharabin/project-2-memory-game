@@ -74,9 +74,8 @@ let gameOver = false;
 
 // Add Event Listener to the game board
 gameBoard.addEventListener('click', function(event) {
-  // Event fires only on cards that are not flipped or matched:
-  //  only on cards that have only one class 'card'
-  if (!gameOver && event.target.classList.length === 1) {
+  // Event fires only on cards that are not flipped or matched
+  if (!gameOver && !event.target.classList.contains('flipped') && !event.target.classList.contains('matched')) {
     event.target.classList.add('flipped');
     if (isOnlyOneCardFlipped) {
       // Select flipped cards
@@ -91,6 +90,11 @@ gameBoard.addEventListener('click', function(event) {
         for (const flippedCard of flippedCards) {
           flippedCard.classList.add('matched');
         }
+      } else {
+        // Add labels to the flipped cards that have been guessed incorrectly
+        for (const flippedCard of flippedCards) {
+          flippedCard.classList.add('incorrect');
+        }
       }
 
       // Flip back cards. If they matched they will stay 'flipped'
@@ -103,6 +107,12 @@ gameBoard.addEventListener('click', function(event) {
     } else {
       // There is only one flipped card that is not matched
       isOnlyOneCardFlipped = true;
+
+      // Remove labels from the flipped cards that have been guessed incorrectly
+      const incorrectCards = gameBoard.querySelectorAll('.incorrect');
+      for (const incorrectCard of incorrectCards) {
+        incorrectCard.classList.remove('incorrect');
+      }
     }
 
     // Check if all cards are matched
