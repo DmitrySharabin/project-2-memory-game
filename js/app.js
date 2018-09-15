@@ -122,8 +122,17 @@ gameBoard.addEventListener('click', function(event) {
     if (numOfMatchedPairs === NUMBER_OF_PAIRS) {
       // The game is over
       gameOver = true;
-      // TODO: add modal to show user that the game is over
+      gameBoard.addEventListener('animationend', function () {
+        // Add Event Listener to the 'Play Again!' button
+        document.querySelector('.play-again').addEventListener('click', function () {
+          // Simply reload the page from cache
+          document.location.reload();
+        });
 
+        // Show modal window after animation ends
+        const gameOverModal = document.querySelector('.game-over');
+        gameOverModal.style.setProperty('visibility', 'visible');
+      });
     }
   }
 });
