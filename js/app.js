@@ -72,6 +72,10 @@ let numOfMatchedPairs = 0;
 // Shows if all cards are matched and the gave is over
 let gameOver = false;
 
+// Count number of moves
+let numOfMoves = 0;
+const movesCounter = document.querySelector('.moves-counter');
+
 // Add Event Listener to the game board
 gameBoard.addEventListener('click', function(event) {
   // Game board shouldn't be flipped
@@ -80,6 +84,12 @@ gameBoard.addEventListener('click', function(event) {
   // Event fires only on cards that are not flipped or matched
   if (!gameOver && !event.target.classList.contains('flipped') && !event.target.classList.contains('matched')) {
     event.target.classList.add('flipped');
+
+    // Increase number of moves and show it to the player
+    numOfMoves += 1;
+    let movesText = numOfMoves > 1 ? 'Moves' : 'Move';
+    movesCounter.textContent = `${numOfMoves} ${movesText}`;
+
     if (isOnlyOneCardFlipped) {
       // Select flipped cards
       const flippedCards = gameBoard.querySelectorAll('.flipped');
