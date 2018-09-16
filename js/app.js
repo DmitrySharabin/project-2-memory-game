@@ -69,9 +69,6 @@ let isOnlyOneCardFlipped = false;
 // Number of pairs of cards that are matched
 let numOfMatchedPairs = 0;
 
-// Shows if all cards are matched and the gave is over
-let gameOver = false;
-
 // Count number of moves
 let numOfMoves = 0;
 const movesCounter = document.querySelector('.moves-counter');
@@ -91,7 +88,7 @@ gameBoard.addEventListener('click', function(event) {
   if (event.target.nodeName === 'UL') { return; }
 
   // Event fires only on cards that are not flipped or matched
-  if (!gameOver && !event.target.classList.contains('flipped') && !event.target.classList.contains('matched')) {
+  if (!event.target.classList.contains('flipped') && !event.target.classList.contains('matched')) {
     event.target.classList.add('flipped');
 
     // Increase number of moves and show it to the player
@@ -158,7 +155,6 @@ gameBoard.addEventListener('click', function(event) {
     // Check if all cards are matched
     if (numOfMatchedPairs === NUMBER_OF_PAIRS) {
       // The game is over
-      gameOver = true;
       gameBoard.addEventListener('animationend', function () {
         // Add Event Listener to the 'Play Again!' button
         document.querySelector('.play-again').addEventListener('click', function () {
