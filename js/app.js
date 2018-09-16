@@ -195,6 +195,24 @@ gameBoard.addEventListener('click', function(event) {
         // Stop the timer
         clearInterval(timerId);
 
+        // Form the result message
+        let resultText = `You made ${numOfMoves} moves and earned`;
+        switch (rating) {
+          case 0:
+            resultText = `${resultText} no stars.`;
+            break;
+          case 1:
+            resultText = `${resultText} 1 star.`;
+            break;
+          case 2:
+          case 3:
+            resultText = `${resultText} ${rating} stars.`;
+        }
+        resultText = `${resultText} It took you ${timerField.textContent} min.`;
+
+        // Add it to the modal window
+        document.querySelector('.result').textContent = resultText;
+
         // Show modal window after animation ends
         const gameOverModal = document.querySelector('.game-over');
         gameOverModal.style.setProperty('visibility', 'visible');
