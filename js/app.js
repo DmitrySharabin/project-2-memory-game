@@ -76,6 +76,9 @@ let gameOver = false;
 let numOfMoves = 0;
 const movesCounter = document.querySelector('.moves-counter');
 
+// Number of stars
+let rating = 3;
+
 // Add Event Listener to the Reset Button
 document.querySelector('.reset-button').addEventListener('click', function () {
   // Simply reload the page from cache
@@ -95,6 +98,24 @@ gameBoard.addEventListener('click', function(event) {
     numOfMoves += 1;
     let movesText = numOfMoves > 1 ? 'Moves' : 'Move';
     movesCounter.textContent = `${numOfMoves} ${movesText}`;
+
+    // Count rating and show it to the user
+    if (rating > 0) {
+      // Choose which star to switch off: it depends on number of moves
+      switch (numOfMoves) {
+        case 19:
+          document.querySelector(`#star-${rating}`).classList.remove('full');
+          rating -= 1;
+          break;
+        case 26:
+          document.querySelector(`#star-${rating}`).classList.remove('full');
+          rating -= 1;
+          break;
+        case 32:
+          document.querySelector(`#star-${rating}`).classList.remove('full');
+          rating -= 1;
+      }
+    }
 
     if (isOnlyOneCardFlipped) {
       // Select flipped cards

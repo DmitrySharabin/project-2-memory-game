@@ -23,6 +23,28 @@ body {
   --matchedCard: #eee;
 }
 
+/* Style star rating */
+.star-rating {
+  display: inline-flex;
+  /* Star color: fill and stroke */
+  color: #000;
+}
+
+/* Empty star */
+.star {
+  width: 1rem;
+  height: 1rem;
+  margin: 0 1px;
+  stroke-width: 2px;
+  stroke: currentColor;
+  fill: transparent;
+}
+
+/* Full star */
+.full {
+  fill: currentColor;
+}
+
 /* Style Reset Button */
 .reset-button {
   width: 48px;
