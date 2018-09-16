@@ -47,8 +47,8 @@ body {
 
 /* Style Reset Button */
 .reset-button {
-  width: 48px;
-  height: 48px;
+  width: 1.5rem;
+  height: 1.5rem;
   cursor: pointer;
 }
 
