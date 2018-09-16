@@ -76,6 +76,13 @@ const movesCounter = document.querySelector('.moves-counter');
 // Number of stars
 let rating = 3;
 
+// Show if timer is on (game has started)
+let isTimerOn = false;
+const timerField = document.querySelector('.timer');
+// Time the user spent to win the game (in seconds)
+let numOfSeconds = 0;
+let timerId;
+
 // Add Event Listener to the Reset Button
 document.querySelector('.reset-button').addEventListener('click', function () {
   // Simply reload the page from cache
@@ -86,6 +93,29 @@ document.querySelector('.reset-button').addEventListener('click', function () {
 gameBoard.addEventListener('click', function(event) {
   // Game board shouldn't be flipped
   if (event.target.nodeName === 'UL') { return; }
+
+  // At first click a timer starts
+  if (!isTimerOn) {
+    isTimerOn = true;
+    timerId = setInterval(function () {
+      // Count time every second
+      numOfSeconds = numOfSeconds + 1;
+
+      // Transform time to format mm:ss
+      let numOfMinutes = Math.floor(numOfSeconds / 60);
+      if (numOfMinutes < 10) {
+        numOfMinutes = `0${numOfMinutes}`;
+      }
+      let time = `${numOfMinutes}:`;
+      if ((numOfSeconds % 60) < 10) {
+        time += '0';
+      }
+      time = `${time}${(numOfSeconds % 60)}`;
+
+      // Show it to the user
+      timerField.textContent = time;
+    }, 1000);
+  }
 
   // Event fires only on cards that are not flipped or matched
   if (!event.target.classList.contains('flipped') && !event.target.classList.contains('matched')) {
@@ -161,6 +191,9 @@ gameBoard.addEventListener('click', function(event) {
           // Simply reload the page from cache
           document.location.reload();
         });
+
+        // Stop the timer
+        clearInterval(timerId);
 
         // Show modal window after animation ends
         const gameOverModal = document.querySelector('.game-over');
