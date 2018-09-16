@@ -76,6 +76,12 @@ let gameOver = false;
 let numOfMoves = 0;
 const movesCounter = document.querySelector('.moves-counter');
 
+// Add Event Listener to the Reset Button
+document.querySelector('.reset-button').addEventListener('click', function () {
+  // Simply reload the page from cache
+  document.location.reload();
+});
+
 // Add Event Listener to the game board
 gameBoard.addEventListener('click', function(event) {
   // Game board shouldn't be flipped

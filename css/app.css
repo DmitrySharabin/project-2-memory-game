@@ -23,6 +23,13 @@ body {
   --matchedCard: #eee;
 }
 
+/* Style Reset Button */
+.reset-button {
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+}
+
 /* Board grid */
 #game-board {
   display: grid;
