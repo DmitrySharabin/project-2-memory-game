@@ -185,34 +185,39 @@ gameBoard.addEventListener('click', function(event) {
     // Check if all cards are matched
     if (numOfMatchedPairs === NUMBER_OF_PAIRS) {
       // The game is over
+
+      // Stop the timer
+      clearInterval(timerId);
+
+      // Form the result message
+      let resultText = `You made ${numOfMoves} moves and earned`;
+      switch (rating) {
+        case 0:
+          resultText = `${resultText} no stars.`;
+          break;
+        case 1:
+          resultText = `${resultText} 1 star.`;
+          break;
+        case 2:
+        case 3:
+          resultText = `${resultText} ${rating} stars.`;
+      }
+      resultText = `${resultText} It took you ${timerField.textContent} min.`;
+
+      // Add it to the modal window
+      document.querySelector('.result').textContent = resultText;
+
+      // Save the result of this attempt to Local Storage
+      saveStatistics(numOfMoves, rating, timerField.textContent);
+
+      // Add Event Listener to the 'Play Again!' button
+      document.querySelector('.play-again').addEventListener('click', function () {
+        // Simply reload the page from cache
+        document.location.reload();
+      });
+
+      // Wait the animation ends and show the game results
       gameBoard.addEventListener('animationend', function () {
-        // Add Event Listener to the 'Play Again!' button
-        document.querySelector('.play-again').addEventListener('click', function () {
-          // Simply reload the page from cache
-          document.location.reload();
-        });
-
-        // Stop the timer
-        clearInterval(timerId);
-
-        // Form the result message
-        let resultText = `You made ${numOfMoves} moves and earned`;
-        switch (rating) {
-          case 0:
-            resultText = `${resultText} no stars.`;
-            break;
-          case 1:
-            resultText = `${resultText} 1 star.`;
-            break;
-          case 2:
-          case 3:
-            resultText = `${resultText} ${rating} stars.`;
-        }
-        resultText = `${resultText} It took you ${timerField.textContent} min.`;
-
-        // Add it to the modal window
-        document.querySelector('.result').textContent = resultText;
-
         // Show modal window after animation ends
         const gameOverModal = document.querySelector('.game-over');
         gameOverModal.style.setProperty('visibility', 'visible');
@@ -220,3 +225,58 @@ gameBoard.addEventListener('click', function(event) {
     }
   }
 });
+
+// Save game statistics to Local Storage
+function saveStatistics(moves, stars, time) {
+  // Read data from Local Storage
+  const statistics = JSON.parse(localStorage.getItem('memoryGameStats') || '[]');
+  // Add new data to statistics
+  statistics.push({moves, stars, time});
+  // Save updated data back to Local Storage
+  localStorage.setItem('memoryGameStats', JSON.stringify(statistics));
+}
+
+// Read game statistics from Local Storage and show it to the user
+(function showStatistics() {
+  const fragment = document.createDocumentFragment();
+  const attempts = document.querySelector('.attempts-stats > tbody');
+  // Read data from Local Storage
+  const stats = JSON.parse(localStorage.getItem('memoryGameStats') || '[]');
+
+  if (!stats.length) {
+    // If there is no data yet, tell the user about that
+    const row = document.createElement('tr');
+    const td = document.createElement('td');
+    td.setAttribute('colspan', 4);
+    td.textContent = 'There is no attempts yet!';
+
+    row.appendChild(td);
+
+    fragment.appendChild(row);
+  } else {
+    // Construct rows with data
+    for (let i = 0; i < stats.length; i++) {
+      const row = document.createElement('tr');
+
+      let td = document.createElement('td');
+      td.textContent = `#${i + 1}`;
+      row.appendChild(td);
+
+      td = document.createElement('td');
+      td.textContent = stats[i].moves;
+      row.appendChild(td);
+
+      td = document.createElement('td');
+      td.textContent = stats[i].stars;
+      row.appendChild(td);
+
+      td = document.createElement('td');
+      td.textContent = stats[i].time;
+      row.appendChild(td);
+
+      fragment.appendChild(row);
+    }
+  }
+  // and add them to the table with attempts statistics
+  attempts.appendChild(fragment);
+})();
