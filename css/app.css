@@ -80,7 +80,16 @@ body {
   height: 100%;
 
   /* The back of a card */
+  /* Pattern from http://lea.verou.me/css3patterns/#zig-zag */
+  background:
+    linear-gradient(135deg, #eceddc 25%, transparent 25%) -50px 0,
+    linear-gradient(225deg, #eceddc 25%, transparent 25%) -50px 0,
+    linear-gradient(315deg, #eceddc 25%, transparent 25%),
+    linear-gradient(45deg, #eceddc 25%, transparent 25%);
+  background-size: 70px 70px;
   background-color: var(--themeColor);
+  border-radius: 2vmin;
+
   font-size: 3rem;
   text-align: center;
 
