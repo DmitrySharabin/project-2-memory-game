@@ -12,7 +12,7 @@
 </head>
 <body>
   <header>
-    <h1>Concentration Game</h1>
+    <h1>Memory Game</h1>
   </header>
   <main>
     <!-- Statistics Panel -->
@@ -35,6 +35,7 @@
       <span class="timer">00:00</span>
       <!-- Reset Game button -->
       <svg class="reset-button">
+        <title>Reset Game</title>
         <use xlink:href="#icon-reset" />
       </svg>
     </div>
@@ -44,7 +45,13 @@
     </ul>
     <!-- Attempts statistics -->
     <table class="attempts-stats">
-      <caption>Attempts Results</caption>
+      <caption>
+        Attempts Results
+        <svg class="clear-results">
+          <title>Clear Results</title>
+          <use xlink:href="#icon-bin" />
+        </svg>
+      </caption>
       <thead>
         <tr>
           <th>Attempt</th>
@@ -57,13 +64,6 @@
 
       </tbody>
     </table>
-    <button class="clear-stats">Clear Results</button>
-    <!-- Modal window with the result of the game -->
-    <div class="game-over">
-      <h1 class="congrats">Congratulations! You Won!</h1>
-      <p class="result"></p>
-      <button class="play-again">Play again!</button>
-    </div>
   </main>
   <footer>
     <!-- Copyright -->
@@ -92,7 +92,12 @@
       </a>
     </div>
   </footer>
-  <script src="js/app.js"></script>
+  <!-- Modal window with the result of the game -->
+  <div class="game-over">
+    <h1 class="congrats">Congratulations! You Won!</h1>
+    <p class="result"></p>
+    <button class="play-again">Play again!</button>
+  </div>
   <!--
     Icon System
     See "Practical SVG" by Chris Coyier (https://abookapart.com/products/practical-svg)
@@ -102,7 +107,8 @@
     <defs>
       <symbol id="icon-reset" viewBox="0 0 32 32">
         <title>Reset Game</title>
-        <path d="M32 12h-12l4.485-4.485c-2.267-2.266-5.28-3.515-8.485-3.515s-6.219 1.248-8.485 3.515c-2.266 2.267-3.515 5.28-3.515 8.485s1.248 6.219 3.515 8.485c2.267 2.266 5.28 3.515 8.485 3.515s6.219-1.248 8.485-3.515c0.189-0.189 0.371-0.384 0.546-0.583l3.010 2.634c-2.933 3.349-7.239 5.464-12.041 5.464-8.837 0-16-7.163-16-16s7.163-16 16-16c4.418 0 8.418 1.791 11.313 4.687l4.687-4.687v12z"></path>
+        <path d="M27.802 5.197c-2.925-3.194-7.13-5.197-11.803-5.197-8.837 0-16 7.163-16 16h3c0-7.18 5.82-13 13-13 3.844 0 7.298 1.669 9.678 4.322l-4.678 4.678h11v-11l-4.198 4.197z"></path>
+        <path d="M29 16c0 7.18-5.82 13-13 13-3.844 0-7.298-1.669-9.678-4.322l4.678-4.678h-11v11l4.197-4.197c2.925 3.194 7.13 5.197 11.803 5.197 8.837 0 16-7.163 16-16h-3z"></path>
       </symbol>
       <symbol id="icon-star" viewBox="0 0 32 32">
         <title>Star Rating</title>
@@ -124,7 +130,13 @@
         <title>My LinkedIn</title>
         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h26c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3zM12 26h-4v-14h4v14zM10 10c-1.106 0-2-0.894-2-2s0.894-2 2-2c1.106 0 2 0.894 2 2s-0.894 2-2 2zM26 26h-4v-8c0-1.106-0.894-2-2-2s-2 0.894-2 2v8h-4v-14h4v2.481c0.825-1.131 2.087-2.481 3.5-2.481 2.488 0 4.5 2.238 4.5 5v9z"></path>
       </symbol>
+      <symbol id="icon-bin" viewBox="0 0 32 32">
+        <title>Clear Results</title>
+        <path d="M4 10v20c0 1.1 0.9 2 2 2h18c1.1 0 2-0.9 2-2v-20h-22zM10 28h-2v-14h2v14zM14 28h-2v-14h2v14zM18 28h-2v-14h2v14zM22 28h-2v-14h2v14z"></path>
+        <path d="M26.5 4h-6.5v-2.5c0-0.825-0.675-1.5-1.5-1.5h-7c-0.825 0-1.5 0.675-1.5 1.5v2.5h-6.5c-0.825 0-1.5 0.675-1.5 1.5v2.5h26v-2.5c0-0.825-0.675-1.5-1.5-1.5zM18 4h-6v-1.975h6v1.975z"></path>
+      </symbol>
     </defs>
   </svg>
+  <script src="js/app.js"></script>
 </body>
 </html>

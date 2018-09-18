@@ -1,6 +1,10 @@
 /* Basic Styling */
+@import url('https://fonts.googleapis.com/css?family=Raleway:300,400,700');
+
 html {
     box-sizing: border-box;
+    font-family: 'Raleway', Helvetica, Arial, sans-serif;
+    color: #333;
 }
 
 *,
@@ -11,8 +15,8 @@ html {
 
 html,
 body {
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     margin: 0;
     padding: 0;
 }
@@ -23,11 +27,33 @@ body {
   --matchedCard: #eee;
 }
 
-/* Style star rating */
+header {
+  padding: 2em;
+}
+
+header h1 {
+  font-weight: 400;
+  font-variant: small-caps;
+  text-align: center;
+  margin: 0;
+}
+
+/* Styling Statistics Panel */
+.statistics {
+  text-align: center;
+  margin: 0 0 10px;
+}
+
+.moves-counter,
+.timer {
+  margin: 0 1em;
+}
+
+/* Styling star rating */
 .star-rating {
   display: inline-flex;
   /* Star color: fill and stroke */
-  color: #000;
+  color: currentColor;
 }
 
 /* Empty star */
@@ -45,21 +71,44 @@ body {
   fill: currentColor;
 }
 
-/* Style Reset Button */
+/* Styling Reset Button */
 .reset-button {
-  width: 1.5rem;
-  height: 1.5rem;
+  margin: 0 0 0 1em;
+  width: 1em;
+  height: 1em;
   cursor: pointer;
 }
 
 /* Board grid */
 #game-board {
   display: grid;
-  grid-template-columns: repeat(4, minmax(48px, 1fr));
-  grid-template-rows: repeat(4, minmax(48px, 100px));
-  grid-gap: 1rem;
-  margin: 0 1rem;
-  padding: 0;
+  grid-template-columns: repeat(4, minmax(70px, 1fr));
+  grid-template-rows: repeat(4, 70px);
+  grid-gap: 10px;
+  justify-content: center;
+  margin: 0 1.2em;
+  padding: 1.3em;
+  min-width: 335px;
+  border-radius: 0.5em;
+  box-shadow: 0px 0px 15px 0px rgba(50, 50, 50, 0.75);
+
+  /* Source: https://bennettfeely.com/gradients/ */
+  background:
+  	linear-gradient(
+  		limegreen,
+  		transparent
+  	),
+  	linear-gradient(
+  		90deg,
+  		skyblue,
+  		transparent
+  	),
+  	linear-gradient(
+  		-90deg,
+  		coral,
+  		transparent
+  	);
+  background-blend-mode: screen;
 }
 
 /* Styling card */
@@ -80,17 +129,17 @@ body {
   height: 100%;
 
   /* The back of a card */
-  /* Pattern from http://lea.verou.me/css3patterns/#zig-zag */
-  background:
-    linear-gradient(135deg, #eceddc 25%, transparent 25%) -50px 0,
-    linear-gradient(225deg, #eceddc 25%, transparent 25%) -50px 0,
-    linear-gradient(315deg, #eceddc 25%, transparent 25%),
-    linear-gradient(45deg, #eceddc 25%, transparent 25%);
-  background-size: 70px 70px;
+  /* Pattern from http://lea.verou.me/css3patterns/#shippo */
+  background-image:
+    radial-gradient(closest-side, transparent 98%, rgba(0,0,0,.3) 99%),
+    radial-gradient(closest-side, transparent 98%, rgba(0,0,0,.3) 99%);
+  background-size: 20px 20px;
+  background-position:0 0, 10px 10px;
   background-color: var(--themeColor);
+
   border-radius: 2vmin;
 
-  font-size: 3rem;
+  font-size: 12vmin;
   text-align: center;
 
   /* Hide card's symbol by default */
@@ -106,7 +155,7 @@ body {
   /* Visually show that flipped cards are not clickable */
   cursor: default;
 
-  background-color: var(--matchedCard);
+  background: var(--matchedCard);
 
   /* Launch flip animation */
   animation: flipIn 1s;
@@ -120,7 +169,7 @@ body {
   /* Visually show that matched cards are not clickable */
   cursor: default;
 
-  background-color: var(--matchedCard);
+  background: var(--matchedCard);
 
   /* Make the card's symbol visible */
   color: inherit;
@@ -254,18 +303,21 @@ body {
   align-self: start;
 }
 
-.play-again {
-  align-self: start;
-}
-
 /*
   Button styling
   Source: https://css-tricks.com/the-power-of-rgba/
 */
-.play-again,
-.clear-stats {
+.play-again {
+  align-self: start;
 
   border: none;
+
+  border-radius: 7px;
+
+  padding: 1rem 2rem;
+  margin: 0;
+
+  font-size: 1rem;
 
   background: var(--themeColor);
   color: #fff;
@@ -276,35 +328,58 @@ body {
   cursor: pointer;
 }
 
-.play-again:hover,
-.clear-stats:hover {
+.play-again:hover {
   box-shadow: inset 0 -4px 0 0 rgba(0, 0, 0, 0.6), 0 0 8px 0 rgba(0, 0, 0, 0.5);
 }
 
-.play-again:focus,
-.clear-stats:focus {
+.play-again:focus {
   box-shadow: inset 0 3px 5px 0 rgba(0, 0, 0, 0.2);
 }
 
-.play-again {
-  border-radius: 7px;
-
-  padding: 1rem 2rem;
-  margin: 0;
-
-  font-size: 1rem;
+/* Styling table with attempts results */
+.attempts-stats {
+  margin: 20px auto;
+  border-collapse: collapse;
 }
 
-.clear-stats {
-  border-radius: 2px;
+.attempts-stats tr {
+  height: 2em;
+}
 
-  padding: 0.5rem 1rem;
-  margin: 0;
+.attempts-stats caption {
+  font-style: italic;
+  text-align: left;
+  font-size: 0.8em;
+  margin: 0 0 5px;
+}
 
-  font-size: 0.8rem;
+.attempts-stats caption:before {
+  content: 'Table. ';
+  font-style: normal;
+}
+
+.attempts-stats th {
+  padding: 0 3vmin 0 0;
+  border-bottom: 1px solid currentColor;
+}
+
+.attempts-stats tbody tr:nth-child(even) {
+  background: #eee;
+}
+
+/* Styling Clear Results button */
+.clear-results {
+  fill: currentColor;
+  width: 1rem;
+  height: 1rem;
+  cursor: pointer;
+  float: right;
 }
 
 /* Styling footer */
+footer {
+  text-align: center;
+}
 
 /* Social Links */
 .social-links {
@@ -313,7 +388,8 @@ body {
 }
 
 .social-icon {
-  margin: 0 1em;
-  width: 2em;
-  height: 2em;
+  margin: 0 0.7em;
+  width: 1.5em;
+  height: 1.5em;
+  fill: #333;
 }

@@ -92,7 +92,7 @@ document.querySelector('.reset-button').addEventListener('click', function () {
 });
 
 // Add Event Listener to the Clear Results Button
-document.querySelector('.clear-stats').addEventListener('click', function () {
+document.querySelector('.clear-results').addEventListener('click', function () {
   // Remove stats from Local Storage
   localStorage.removeItem('memoryGameStats');
   // Update info on the screen
