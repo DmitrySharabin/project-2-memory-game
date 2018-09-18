@@ -303,3 +303,17 @@ body {
 
   font-size: 0.8rem;
 }
+
+/* Styling footer */
+
+/* Social Links */
+.social-links {
+  display: flex;
+  justify-content: center;
+}
+
+.social-icon {
+  margin: 0 1em;
+  width: 2em;
+  height: 2em;
+}
