@@ -63,6 +63,8 @@ for (let i = 0; i < 2 * NUMBER_OF_PAIRS; i++) {
 // Add cards to the game board
 gameBoard.appendChild(fragment);
 
+showStatistics();
+
 // Shows if only one card (that is not matched) is flipped
 let isOnlyOneCardFlipped = false;
 
@@ -87,6 +89,14 @@ let timerId;
 document.querySelector('.reset-button').addEventListener('click', function () {
   // Simply reload the page from cache
   document.location.reload();
+});
+
+// Add Event Listener to the Clear Results Button
+document.querySelector('.clear-stats').addEventListener('click', function () {
+  // Remove stats from Local Storage
+  localStorage.removeItem('memoryGameStats');
+  // Update info on the screen
+  showStatistics();
 });
 
 // Add Event Listener to the game board
@@ -237,9 +247,15 @@ function saveStatistics(moves, stars, time) {
 }
 
 // Read game statistics from Local Storage and show it to the user
-(function showStatistics() {
+function showStatistics() {
   const fragment = document.createDocumentFragment();
   const attempts = document.querySelector('.attempts-stats > tbody');
+
+  // Remove previous data from the table
+  while (attempts.firstElementChild) {
+    attempts.removeChild(attempts.firstElementChild);
+  }
+
   // Read data from Local Storage
   const stats = JSON.parse(localStorage.getItem('memoryGameStats') || '[]');
 
@@ -279,4 +295,4 @@ function saveStatistics(moves, stars, time) {
   }
   // and add them to the table with attempts statistics
   attempts.appendChild(fragment);
-})();
+}
