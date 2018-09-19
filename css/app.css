@@ -129,12 +129,9 @@ header h1 {
   height: 100%;
 
   /* The back of a card */
-  /* Pattern from http://lea.verou.me/css3patterns/#shippo */
-  background-image:
-    radial-gradient(closest-side, transparent 98%, rgba(0,0,0,.3) 99%),
-    radial-gradient(closest-side, transparent 98%, rgba(0,0,0,.3) 99%);
-  background-size: 20px 20px;
-  background-position:0 0, 10px 10px;
+  /* Source of the image: https://www.flaticon.com/free-icon/chip_897219 */
+  background: url(../img/chip.svg) center center no-repeat content-box;
+  background-blend-mode: overlay;
   background-color: var(--themeColor);
 
   border-radius: 2vmin;
@@ -225,8 +222,14 @@ header h1 {
 
 /* Make not matched cards red and show their symbols */
 @keyframes changeCardColor {
-  from { background: #f00; color: inherit; }
-  to { background: var(--themeColor); color: transparent; }
+  from {
+    background: #f00;
+    /* Fix issue in Safari: it doesn't understand color: inherit */
+    color: #fff;
+  }
+  to {
+    background: var(--themeColor);
+  }
 }
 
 /*
