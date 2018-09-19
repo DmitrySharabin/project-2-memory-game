@@ -231,6 +231,8 @@ gameBoard.addEventListener('click', function(event) {
         // Show modal window after animation ends
         const gameOverModal = document.querySelector('.game-over');
         gameOverModal.style.setProperty('visibility', 'visible');
+        // Launch text animation
+        document.querySelector('.congrats').style.setProperty('animation', 'boom 0.3s');
       });
     }
   }
