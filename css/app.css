@@ -139,7 +139,7 @@ header h1 {
 
   border-radius: 2vmin;
 
-  font-size: 12vmin;
+  font-size: 48px;
   text-align: center;
 
   /* Hide card's symbol by default */
@@ -410,4 +410,17 @@ footer {
   width: 1.5em;
   height: 1.5em;
   fill: #333;
+}
+
+/* Make game layout responsive */
+@media (min-width: 500px) {
+  #game-board {
+    max-width: 500px;
+    margin: 0 auto;
+    grid-template-rows: repeat(4, 110px);
+  }
+
+  .card {
+    font-size: 70px;
+  }
 }
