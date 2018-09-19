@@ -35,6 +35,9 @@ const theme = themes[themeNumber].theme;
 // Set theme color
 document.querySelector(':root').style.setProperty('--themeColor', themes[themeNumber].color);
 
+// Show game's theme to the user
+document.querySelector('.game-theme').textContent = `theme “${themes[themeNumber].name}”`;
+
 // There are two cards with the same symbol on it.
 // Use every symbol of the theme twice
 const symbols = [...theme, ...theme];
